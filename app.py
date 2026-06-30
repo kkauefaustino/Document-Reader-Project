@@ -30,14 +30,16 @@ if st.session_state.tela_atual == "tela_upload":
         st.info("Arquivo carregado") 
               
         if st.button("Analisar PDF"):
-
+            #Leitor do PDF
             leitor_pdf = PdfReader(arqv_pdf)
             texo_extraido = ""
 
+            #Extraindo o texto
             for pagina in leitor_pdf.pages:
                 texo_extraido += pagina.extract_text() + "/n"
                  
             st.session.pdf_txt = texo_extraido
-
+            
+            #Mudança para a tela de chat
             st.session.tela_atual = "tela_chat"
             st.rerun()
