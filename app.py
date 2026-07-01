@@ -9,6 +9,9 @@ load_dotenv()
 #Agora conseguimos acessar a chave de forma segura
 api_key = os.getenv("GEMINI_API_KEY")
 
+#Config inicial da página
+st.set_page_config(page_title="DocReader AI", page_icon="🤖", layout="centered")
+
 #Inicializa as variáveis de memória da sessão
 if "tela_atual" not in st.session_state:
     st.session_state.tela_atual = "tela_upload"
@@ -17,8 +20,6 @@ if "pdf_txt" not in st.session_state:
 
 #Tela do upload
 if st.session_state.tela_atual == "tela_upload":
-
-    st.set_page_config(page_title="DocReader AI", page_icon="🤖", layout="centered")
 
     st.markdown("<h1><br><br>Leitor de Documentos Inteligente</h1>", unsafe_allow_html=True)
     st.markdown("<p style='margin-left: 110px;'> Suba um arquivo PDF e faça perguntas diretamente para a IA.</p>", unsafe_allow_html=True)
@@ -38,8 +39,13 @@ if st.session_state.tela_atual == "tela_upload":
             for pagina in leitor_pdf.pages:
                 texo_extraido += pagina.extract_text() + "/n"
                  
-            st.session.pdf_txt = texo_extraido
+            st.session_state.pdf_txt = texo_extraido
             
             #Mudança para a tela de chat
-            st.session.tela_atual = "tela_chat"
+            st.session_state.tela_atual = "tela_chat"
             st.rerun()
+    
+elif st.session_state.tela_atual == "tela_chat":
+    st.title("Conteúdo do PDF")
+
+    st.text_area("Texto extraído: ", value=st.session_state.pdf_txt, height=400)
