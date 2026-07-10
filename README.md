@@ -1,4 +1,4 @@
-# DocReader AI 🤖📄
+# DocReader AI 
 
 O **DocReader AI** é um assistente inteligente de análise de documentos baseado na arquitetura **RAG (Retrieval-Augmented Generation)**. A aplicação permite que o usuário faça o upload de arquivos PDF e converse diretamente com o documento em tempo real, obtendo respostas rápidas, precisas e sem alucinações da Inteligência Artificial.
 
@@ -6,7 +6,7 @@ Este projeto foi desenvolvido com foco em **Ciência de Dados** e **Engenharia d
 
 ---
 
-## 🚀 Funcionalidades
+## Funcionalidades
 
 * **Upload e Processamento Dinâmico**: Extração de texto puro de arquivos binários PDF.
 * **Arquitetura RAG Local**: Integração com banco de dados vetorial para buscar apenas os trechos relevantes do documento, economizando tokens e aumentando a velocidade da resposta.
@@ -16,7 +16,7 @@ Este projeto foi desenvolvido com foco em **Ciência de Dados** e **Engenharia d
 
 ---
 
-## 🛠️ Tecnologias e Ferramentas
+## Tecnologias e Ferramentas
 
 * **Linguagem**: [Python (v3.12+)](https://www.python.org/)
 * **Interface Web**: [Streamlit](https://streamlit.io/)
@@ -27,7 +27,7 @@ Este projeto foi desenvolvido com foco em **Ciência de Dados** e **Engenharia d
 
 ---
 
-## 🧠 Como Funciona a Arquitetura (Por trás dos panos)
+## Como Funciona a Arquitetura (Por trás dos panos)
 
 1.  **Ingestão de Dados**: O documento PDF é carregado e processado pelo `pypdf`.
 2.  **Fatiamento Inteligente**: O texto extraído é quebrado em blocos de 1000 caracteres com sobreposição (*overlap*) de 200 caracteres utilizando o `RecursiveCharacterTextSplitter`.
@@ -36,7 +36,7 @@ Este projeto foi desenvolvido com foco em **Ciência de Dados** e **Engenharia d
 
 ---
 
-## 🔧 Como Executar o Projeto Localmente
+## Como Executar o Projeto Localmente
 
 ### 1. Clonar o Repositório
 ```bash
