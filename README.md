@@ -27,7 +27,7 @@ Este projeto foi desenvolvido com foco em **Ciência de Dados** e **Engenharia d
 
 ---
 
-## Como Funciona a Arquitetura (Por trás dos panos)
+## Como Funciona a Arquitetura 
 
 1.  **Ingestão de Dados**: O documento PDF é carregado e processado pelo `pypdf`.
 2.  **Fatiamento Inteligente**: O texto extraído é quebrado em blocos de 1000 caracteres com sobreposição (*overlap*) de 200 caracteres utilizando o `RecursiveCharacterTextSplitter`.
