@@ -11,7 +11,11 @@ load_dotenv()
 #Agora conseguimos acessar a chave de forma segura
 api_key = os.getenv("GEMINI_API_KEY")
 
+#Inicia o chromadb
 cliente_db = chromadb.PersistentClient(path="./meu_chromadb")
+
+#Variável da coleção do db
+collection = cliente_db.get_or_create_collection(name="documentos_pdf")
 
 #Config inicial da página
 st.set_page_config(page_title="DocReader AI", page_icon="🤖", layout="centered")
@@ -45,14 +49,16 @@ if st.session_state.tela_atual == "tela_upload":
                  
             st.session_state.pdf_txt = texo_extraido
 
-            collection = cliente_db.get_or_create_collection(name="documentos_pdf")
-
+            #Config do splitter
             fatiador = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)      
 
+            #Fatiando o texto extraído
             pedacos_de_texto = fatiador.split_text(texo_extraido)
-
+            
+            #Add Id para cada pedaço de texto
             id_list = [f"id_{i}" for i in range(len(pedacos_de_texto))]
 
+            #Adicionando o texto com o ID na coleção do db
             collection.add(documents = pedacos_de_texto, ids = id_list)
                   
             #Mudança para a tela de chat
@@ -93,6 +99,15 @@ elif st.session_state.tela_atual == "tela_chat":
 
         #Cliente que conversa com a API
         client = genai.Client(api_key=api_key)
+        
+        #Busca na coleção 3 pedaços de textos de acordo com a pergunta do usuário
+        resultado_da_busca = collection.query(query_texts=[pergunta_usuario], n_results=3)
+
+        #Corta o resultado da busca para se obter apenas o necessário
+        trechos_relevantes = resultado_da_busca['documents'][0]
+
+        #Pula linhas para a IA ler melhor
+        contexto = '\n'.join(trechos_relevantes)
 
         #Prompt da IA
         prompt = f"""
@@ -100,7 +115,7 @@ elif st.session_state.tela_atual == "tela_chat":
         Use o seguinte texto extraído de um PDF para responder à pergunta do usuário.
         
         Texto do PDF:
-        {st.session_state.pdf_txt}
+        {contexto}
         
         Pergunta:
         {pergunta_usuario}
