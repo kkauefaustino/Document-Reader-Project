@@ -18,7 +18,7 @@ cliente_db = chromadb.PersistentClient(path="./meu_chromadb")
 collection = cliente_db.get_or_create_collection(name="documentos_pdf")
 
 #Config inicial da página
-st.set_page_config(page_title="DocReader AI", page_icon="🤖", layout="centered")
+st.set_page_config(page_title="DocReader AI", layout="centered")
 
 #Inicializa as variáveis de memória da sessão
 if "tela_atual" not in st.session_state:
