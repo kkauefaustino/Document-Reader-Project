@@ -42,3 +42,27 @@ Este projeto foi desenvolvido com foco em **Ciência de Dados** e **Engenharia d
 ```bash
 git clone [https://github.com/kkauefaustino/Nome-Do-Seu-Repositorio.git](https://github.com/kkauefaustino/Nome-Do-Seu-Repositorio.git)
 cd Nome-Do-Seu-Repositorio
+```
+### 2. Configurar o Ambiente Virtual (venv)
+```PowerShell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+### 3. Instalar as Dependências
+```PowerShell
+python -m pip install -r requirements.txt
+```
+### 4. Configurar as Variáveis de Ambiente
+Crie um arquivo chamado .env na raiz do projeto e adicione a sua chave da API do Gemini:
+```
+GEMINI_API_KEY=sua_chave_da_api_aqui
+```
+### 5. Rodar a Aplicação
+```PowerShell
+streamlit run app.py
+```
+Autor
+
+Desenvolvido por Kauê Faustino — Foco em Ciência de Dados, Business Intelligence e Engenharia de Software.
+
+GitHub: @kkauefaustino
